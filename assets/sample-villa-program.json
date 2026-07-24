@@ -1,0 +1,61 @@
+{
+  "floors": [
+    {
+      "footprint": {"depth_m": 14.0, "width_m": 18.0, "x_m": 0.0, "y_m": 0.0},
+      "id": "ground-floor",
+      "level_m": 0.0,
+      "name": "Ground Floor",
+      "rooms": [
+        {"connect_to": ["guest-lobby"], "depth_m": 4.5, "id": "guest-majlis", "name": "Guest Majlis", "natural_light": true, "target_area_m2": 24.75, "type": "majlis", "width_m": 5.5, "x_m": 0, "y_m": 0, "zone": "guest"},
+        {"connect_to": ["guest-lobby"], "depth_m": 2, "id": "guest-wc", "mechanical_ventilation": true, "name": "Guest WC", "target_area_m2": 4, "type": "bathroom", "width_m": 2, "x_m": 5.5, "y_m": 2.5, "zone": "guest"},
+        {"connect_to": ["guest-majlis", "guest-wc", "main-corridor"], "depth_m": 2.5, "external_entry": true, "id": "guest-lobby", "name": "Guest Lobby", "target_area_m2": 5, "type": "lobby", "width_m": 2, "x_m": 5.5, "y_m": 0, "zone": "guest"},
+        {"connect_to": ["family-lobby"], "depth_m": 4.5, "id": "family-living", "name": "Family Living", "natural_light": true, "target_area_m2": 22.5, "type": "living", "width_m": 5, "x_m": 7.5, "y_m": 0, "zone": "family"},
+        {"connect_to": ["family-living", "main-corridor"], "depth_m": 4.5, "external_entry": true, "id": "family-lobby", "name": "Family Lobby", "target_area_m2": 9, "type": "lobby", "width_m": 2, "x_m": 12.5, "y_m": 0, "zone": "family"},
+        {"connect_to": ["main-corridor"], "depth_m": 4.5, "id": "stair-ground", "name": "Main Stair", "target_area_m2": 9, "type": "stair", "width_m": 2, "x_m": 14.5, "y_m": 0, "zone": "shared"},
+        {"connect_to": ["main-corridor"], "depth_m": 2.3, "id": "elevator-ground", "name": "Elevator", "target_area_m2": 3.45, "type": "elevator", "width_m": 1.5, "x_m": 16.5, "y_m": 2.2, "zone": "shared"},
+        {"connect_to": ["main-corridor"], "depth_m": 2.2, "id": "shaft-ground", "name": "MEP Shaft", "target_area_m2": 3.3, "type": "shaft", "width_m": 1.5, "x_m": 16.5, "y_m": 0.0, "zone": "service"},
+        {"connect_to": ["dining", "kitchen", "pantry", "service-corridor", "maid-room", "maid-bath", "guest-lobby", "family-lobby", "stair-ground", "elevator-ground", "shaft-ground"], "depth_m": 1.5, "id": "main-corridor", "name": "Main Corridor", "target_area_m2": 27, "type": "corridor", "width_m": 18, "x_m": 0, "y_m": 4.5, "zone": "shared"},
+        {"connect_to": ["main-corridor", "kitchen"], "depth_m": 4, "id": "dining", "name": "Dining", "natural_light": true, "target_area_m2": 18, "type": "dining", "width_m": 4.5, "x_m": 0, "y_m": 6, "zone": "family"},
+        {"connect_to": ["main-corridor", "dining", "pantry", "laundry"], "depth_m": 4, "id": "kitchen", "mechanical_ventilation": true, "name": "Kitchen", "target_area_m2": 18, "type": "kitchen", "width_m": 4.5, "x_m": 4.5, "y_m": 6, "zone": "service"},
+        {"connect_to": ["main-corridor", "kitchen", "storage-ground"], "depth_m": 4, "id": "pantry", "name": "Pantry", "target_area_m2": 8, "type": "pantry", "width_m": 2, "x_m": 9, "y_m": 6, "zone": "service"},
+        {"connect_to": ["main-corridor", "maid-room", "service-entry"], "depth_m": 4, "id": "service-corridor", "name": "Service Corridor", "target_area_m2": 8, "type": "corridor", "width_m": 2, "x_m": 11, "y_m": 6, "zone": "service"},
+        {"connect_to": ["main-corridor", "maid-bath", "service-corridor"], "depth_m": 4, "id": "maid-room", "name": "Maid Room", "natural_light": true, "target_area_m2": 12, "type": "bedroom", "width_m": 3, "x_m": 15, "y_m": 6, "zone": "service"},
+        {"connect_to": ["main-corridor", "maid-room"], "depth_m": 4, "id": "maid-bath", "mechanical_ventilation": true, "name": "Maid Bath", "target_area_m2": 8, "type": "bathroom", "width_m": 2, "x_m": 13, "y_m": 6, "zone": "service"},
+        {"connect_to": ["laundry"], "depth_m": 4, "external_entry": true, "id": "garage", "name": "Two-Car Garage", "target_area_m2": 24, "type": "garage", "width_m": 6, "x_m": 0, "y_m": 10, "zone": "service"},
+        {"connect_to": ["garage", "kitchen", "storage-ground"], "depth_m": 4, "id": "laundry", "mechanical_ventilation": true, "name": "Laundry", "target_area_m2": 12, "type": "laundry", "width_m": 3, "x_m": 6, "y_m": 10, "zone": "service"},
+        {"connect_to": ["laundry", "pantry", "service-entry"], "depth_m": 4, "id": "storage-ground", "name": "General Storage", "target_area_m2": 8, "type": "storage", "width_m": 2, "x_m": 9, "y_m": 10, "zone": "service"},
+        {"connect_to": ["service-corridor", "storage-ground"], "depth_m": 4, "external_entry": true, "id": "service-entry", "name": "Service Entry", "target_area_m2": 8, "type": "lobby", "width_m": 2, "x_m": 11, "y_m": 10, "zone": "service"},
+        {"connect_to": ["family-living"], "depth_m": 4, "id": "family-terrace", "is_exterior": true, "name": "Family Terrace", "target_area_m2": 20, "type": "terrace", "width_m": 5, "x_m": 13, "y_m": 10, "zone": "family"}
+      ]
+    },
+    {
+      "footprint": {"depth_m": 14.0, "width_m": 18.0, "x_m": 0.0, "y_m": 0.0},
+      "id": "first-floor",
+      "level_m": 3.4,
+      "name": "First Floor",
+      "rooms": [
+        {"connect_to": ["master-dressing", "upper-corridor"], "depth_m": 4.5, "id": "master-bedroom", "name": "Master Bedroom", "natural_light": true, "target_area_m2": 22.5, "type": "bedroom", "width_m": 5, "x_m": 0, "y_m": 0, "zone": "family"},
+        {"connect_to": ["master-bedroom", "master-bath"], "depth_m": 4.5, "id": "master-dressing", "name": "Master Dressing", "target_area_m2": 11.25, "type": "dressing", "width_m": 2.5, "x_m": 5, "y_m": 0, "zone": "family"},
+        {"connect_to": ["master-dressing"], "depth_m": 4.5, "id": "master-bath", "mechanical_ventilation": true, "name": "Master Bath", "target_area_m2": 11.25, "type": "bathroom", "width_m": 2.5, "x_m": 7.5, "y_m": 0, "zone": "family"},
+        {"connect_to": ["upper-corridor"], "depth_m": 4.5, "id": "family-lounge", "name": "Family Lounge", "natural_light": true, "target_area_m2": 20.25, "type": "living", "width_m": 4.5, "x_m": 10, "y_m": 0, "zone": "family"},
+        {"connect_to": ["upper-corridor"], "depth_m": 4.5, "id": "stair-first", "name": "Main Stair", "target_area_m2": 9, "type": "stair", "width_m": 2, "x_m": 14.5, "y_m": 0, "zone": "shared"},
+        {"connect_to": ["upper-corridor"], "depth_m": 2.3, "id": "elevator-first", "name": "Elevator", "target_area_m2": 3.45, "type": "elevator", "width_m": 1.5, "x_m": 16.5, "y_m": 2.2, "zone": "shared"},
+        {"connect_to": ["stair-first"], "depth_m": 2.2, "id": "linen", "name": "Linen Storage", "target_area_m2": 3.3, "type": "storage", "width_m": 1.5, "x_m": 16.5, "y_m": 0.0, "zone": "family"},
+        {"connect_to": ["master-bedroom", "family-lounge", "stair-first", "elevator-first", "linen", "bedroom-2", "bath-2", "bedroom-3", "bath-3", "bedroom-4"], "depth_m": 1.5, "id": "upper-corridor", "name": "Upper Corridor", "target_area_m2": 27, "type": "corridor", "width_m": 18, "x_m": 0, "y_m": 4.5, "zone": "family"},
+        {"connect_to": ["upper-corridor", "bath-2"], "depth_m": 5, "id": "bedroom-2", "name": "Bedroom 2", "natural_light": true, "target_area_m2": 22.5, "type": "bedroom", "width_m": 4.5, "x_m": 0, "y_m": 6, "zone": "family"},
+        {"connect_to": ["upper-corridor", "bedroom-2"], "depth_m": 3, "id": "bath-2", "mechanical_ventilation": true, "name": "Bathroom 2", "target_area_m2": 6, "type": "bathroom", "width_m": 2, "x_m": 4.5, "y_m": 6, "zone": "family"},
+        {"connect_to": ["bedroom-2"], "depth_m": 2, "id": "storage-first", "name": "Bedroom Storage", "target_area_m2": 4, "type": "storage", "width_m": 2, "x_m": 4.5, "y_m": 9, "zone": "family"},
+        {"connect_to": ["upper-corridor", "bath-3"], "depth_m": 5, "id": "bedroom-3", "name": "Bedroom 3", "natural_light": true, "target_area_m2": 22.5, "type": "bedroom", "width_m": 4.5, "x_m": 6.5, "y_m": 6, "zone": "family"},
+        {"connect_to": ["upper-corridor", "bedroom-3"], "depth_m": 3, "id": "bath-3", "mechanical_ventilation": true, "name": "Bathroom 3", "target_area_m2": 6, "type": "bathroom", "width_m": 2, "x_m": 11, "y_m": 6, "zone": "family"},
+        {"connect_to": ["bedroom-4"], "depth_m": 2, "id": "bath-4", "mechanical_ventilation": true, "name": "Bathroom 4", "target_area_m2": 4, "type": "bathroom", "width_m": 2, "x_m": 11, "y_m": 9, "zone": "family"},
+        {"connect_to": ["upper-corridor", "bath-4"], "depth_m": 5, "id": "bedroom-4", "name": "Bedroom 4", "natural_light": true, "target_area_m2": 25, "type": "bedroom", "width_m": 5, "x_m": 13, "y_m": 6, "zone": "family"},
+        {"connect_to": ["bedroom-2", "bedroom-3"], "depth_m": 3, "id": "front-balcony", "is_exterior": true, "name": "Front Balcony", "target_area_m2": 27, "type": "balcony", "width_m": 9, "x_m": 0, "y_m": 11, "zone": "family"},
+        {"connect_to": ["bedroom-3", "bedroom-4"], "depth_m": 3, "id": "roof-terrace", "is_exterior": true, "name": "Upper Terrace", "target_area_m2": 27, "type": "terrace", "width_m": 9, "x_m": 9, "y_m": 11, "zone": "family"}
+      ]
+    }
+  ],
+  "project": {"client": "Sample Client", "country_code": "XX", "drawing_number": "VFC-001", "jurisdiction": "Local jurisdiction", "location": "Example Site", "name": "World-Ready Courtyard Villa", "north_angle_deg": 0, "revision": "A", "standards_profile": "generic-metric", "units": "m"},
+  "review": {"authority": "Set the current local authority", "code_sources": [], "notes": ["Generic design baseline only; verify all current local requirements."]},
+  "site": {"depth_m": 30.0, "parking_spaces": 2, "setbacks_m": {"front": 4.0, "left": 2.0, "rear": 2.0, "right": 2.0}, "street_side": "south", "width_m": 25.0},
+  "standards": {"clear_ceiling_height_m": 3.0, "external_wall_thickness_m": 0.25, "floor_to_floor_height_m": 3.4, "internal_wall_thickness_m": 0.15, "maximum_kitchen_dining_distance_m": 8.0, "maximum_service_route_m": 8.0, "minimum_corridor_width_m": 1.2, "minimum_door_width_m": 0.8, "minimum_storage_ratio": 0.025, "parapet_height_m": 1.1, "plumbing_stack_tolerance_m": 3.0}
+}

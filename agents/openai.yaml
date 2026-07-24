@@ -1,0 +1,4 @@
+interface:
+  display_name: "Villa Floorplan CAD"
+  short_description: "Design and validate editable villa CAD plans"
+  default_prompt: "Use $villa-floorplan-cad to create or revise a world-ready metric villa floor plan in this repository and apply the correct jurisdiction profile."

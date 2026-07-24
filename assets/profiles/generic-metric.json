@@ -1,0 +1,28 @@
+{
+  "profile_id": "generic-metric",
+  "project": {
+    "country_code": "XX",
+    "jurisdiction": "Local jurisdiction",
+    "standards_profile": "generic-metric"
+  },
+  "review": {
+    "authority": "Set the current local authority",
+    "code_sources": [],
+    "notes": [
+      "Generic design baseline only; verify all current local requirements."
+    ]
+  },
+  "standards": {
+    "clear_ceiling_height_m": 3.0,
+    "external_wall_thickness_m": 0.25,
+    "floor_to_floor_height_m": 3.4,
+    "internal_wall_thickness_m": 0.15,
+    "maximum_kitchen_dining_distance_m": 8.0,
+    "maximum_service_route_m": 8.0,
+    "minimum_corridor_width_m": 1.2,
+    "minimum_door_width_m": 0.8,
+    "minimum_storage_ratio": 0.025,
+    "parapet_height_m": 1.1,
+    "plumbing_stack_tolerance_m": 3.0
+  }
+}

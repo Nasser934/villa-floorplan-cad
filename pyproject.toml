@@ -1,0 +1,12 @@
+[project]
+name = "villa-floorplan-cad"
+version = "0.2.0"
+description = "World-ready deterministic villa floor-plan generation, validation, and CAD export skill"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Nasser934" }]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+addopts = "-ra"

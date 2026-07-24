@@ -1,0 +1,31 @@
+{
+  "profile_id": "saudi-arabia",
+  "project": {
+    "country_code": "SA",
+    "jurisdiction": "Saudi Arabia",
+    "standards_profile": "saudi-arabia"
+  },
+  "review": {
+    "authority": "Relevant Saudi municipality and approving authorities",
+    "code_sources": [
+      "Saudi Building Code",
+      "Current Ministry of Municipalities and Housing residential requirements"
+    ],
+    "notes": [
+      "Check current setbacks, coverage, height, parking, fire, accessibility, utilities, and Civil Defence requirements for the plot."
+    ]
+  },
+  "standards": {
+    "clear_ceiling_height_m": 3.0,
+    "external_wall_thickness_m": 0.25,
+    "floor_to_floor_height_m": 3.4,
+    "internal_wall_thickness_m": 0.15,
+    "maximum_kitchen_dining_distance_m": 8.0,
+    "maximum_service_route_m": 8.0,
+    "minimum_corridor_width_m": 1.2,
+    "minimum_door_width_m": 0.8,
+    "minimum_storage_ratio": 0.025,
+    "parapet_height_m": 1.1,
+    "plumbing_stack_tolerance_m": 3.0
+  }
+}

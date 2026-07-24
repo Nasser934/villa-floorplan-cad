@@ -1,0 +1,8 @@
+{
+  "metric_only": true,
+  "output_dir": "output",
+  "profile": "generic-metric",
+  "program": "program.json",
+  "schema_version": "villa-floorplan-cad.project.v1",
+  "viewer_dir": "viewer"
+}
