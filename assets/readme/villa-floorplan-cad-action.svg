@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 900" role="img" aria-labelledby="title desc">
+<title id="title">villa-floorplan-cad animated workflow</title>
+<desc id="desc">A world-ready metric villa floor-plan CAD skill moving through define, generate, validate, refine, document, and deliver.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050816"/><stop offset=".5" stop-color="#0a1730"/><stop offset="1" stop-color="#07101f"/></linearGradient>
+  <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9cff57"/><stop offset=".28" stop-color="#22d3ee"/><stop offset=".55" stop-color="#5b8cff"/><stop offset=".8" stop-color="#a855f7"/><stop offset="1" stop-color="#ff5ca8"/></linearGradient>
+  <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22d3ee"/><stop offset=".55" stop-color="#7c3aed"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#15355a" stroke-width="1" opacity=".35"/></pattern>
+  <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0l12 6-12 6z" fill="#65d9ff"/></marker>
+</defs>
+<rect width="1536" height="900" rx="28" fill="url(#bg)"/>
+<rect width="1536" height="900" rx="28" fill="url(#grid)"/>
+<path d="M40 1H1496Q1535 1 1535 40V860Q1535 899 1496 899H40Q1 899 1 860V40Q1 1 40 1Z" fill="none" stroke="#1d4d77" stroke-width="2"/>
+<text x="64" y="98" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="70" font-weight="800" fill="url(#brand)">villa-floorplan-cad</text>
+<text x="68" y="145" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="25" fill="#e7f4ff">World-ready, deterministic residential floor-plan engineering for Codex</text>
+<g transform="translate(1096 55)"><rect width="372" height="108" rx="20" fill="#0d2037" stroke="#255c84"/><text x="28" y="42" fill="#9de9ff" font-size="22" font-family="Inter,Arial" font-weight="700">GLOBAL • METRIC • EDITABLE</text><text x="28" y="76" fill="#a9bcd0" font-size="17" font-family="Inter,Arial">Local profiles • open formats • code-aware</text></g>
+<g transform="translate(60 198)">
+ <rect width="735" height="470" rx="24" fill="#f4f6f8" stroke="#5ccff7" stroke-width="3"/>
+ <rect x="22" y="22" width="691" height="44" rx="10" fill="#0c1b2e"/>
+ <text x="44" y="52" fill="#dff8ff" font-family="Inter,Arial" font-size="20" font-weight="700">EDITABLE PLAN • 24.00 m × 20.00 m • GROUND FLOOR</text>
+ <g transform="translate(56 92)" stroke="#13293d" fill="#fff" stroke-width="4">
+  <rect width="625" height="330"/>
+  <path d="M0 115H625M190 0V330M415 0V330M190 210H625M510 115V330"/>
+  <path d="M0 245H190M305 0V115M415 65H625"/>
+  <g stroke="#ff8a3d" stroke-width="3" fill="none"><path d="M190 160h32a32 32 0 0 1-32 32"/><path d="M415 260h32a32 32 0 0 0-32-32"/><path d="M510 155h30a30 30 0 0 1-30 30"/></g>
+  <g stroke="#27b7e9" stroke-width="7"><path d="M45 0h75M235 0h50M455 0h88M625 245v55"/></g>
+  <g fill="#17283a" stroke="none" font-family="Inter,Arial" font-size="16" text-anchor="middle">
+   <text x="95" y="57">GUEST SUITE</text><text x="95" y="78" font-size="13">24.0 m²</text>
+   <text x="302" y="52">FAMILY LOUNGE</text><text x="302" y="74" font-size="13">31.5 m²</text>
+   <text x="520" y="42">DINING</text><text x="520" y="63" font-size="13">23.1 m²</text>
+   <text x="95" y="178">KITCHEN</text><text x="95" y="199" font-size="13">21.7 m²</text>
+   <text x="303" y="170">COURTYARD</text><text x="303" y="191" font-size="13">18.0 m²</text>
+   <text x="462" y="166">PANTRY</text><text x="462" y="187" font-size="13">6.2 m²</text>
+   <text x="565" y="166">BATH</text><text x="565" y="187" font-size="13">5.8 m²</text>
+   <text x="95" y="286">SERVICE</text><text x="95" y="307" font-size="13">18.9 m²</text>
+   <text x="303" y="275">FOYER / CORE</text><text x="303" y="296" font-size="13">22.4 m²</text>
+   <text x="462" y="275">STAIR</text><text x="565" y="275">ELEVATOR</text>
+  </g>
+  <g fill="none" stroke-width="4" stroke-dasharray="12 8">
+   <path d="M610 318H365V250H245V88" stroke="#74d66c"><animate attributeName="stroke-dashoffset" values="0;-40" dur="1.4s" repeatCount="indefinite"/></path>
+   <path d="M610 90H530V142" stroke="#3ebdff"><animate attributeName="stroke-dashoffset" values="0;-40" dur="1.1s" repeatCount="indefinite"/></path>
+   <path d="M12 315H150V190" stroke="#ff6a92"><animate attributeName="stroke-dashoffset" values="0;-40" dur="1.7s" repeatCount="indefinite"/></path>
+  </g>
+ </g>
+ <g font-family="Inter,Arial" font-size="15"><circle cx="74" cy="450" r="6" fill="#74d66c"/><text x="88" y="456" fill="#20354b">Family</text><circle cx="182" cy="450" r="6" fill="#3ebdff"/><text x="196" y="456" fill="#20354b">Guest</text><circle cx="280" cy="450" r="6" fill="#ff6a92"/><text x="294" y="456" fill="#20354b">Service</text></g>
+</g>
+<g transform="translate(825 198)">
+ <rect width="650" height="470" rx="24" fill="#0b1b2d" stroke="#315e82" stroke-width="2"/>
+ <text x="30" y="48" font-family="Inter,Arial" font-size="23" font-weight="700" fill="#dff8ff">MODEL + VALIDATION</text>
+ <g transform="translate(42 80)" stroke="#7ce7ff" stroke-width="2">
+  <path d="M60 195 245 115 410 183 224 267Z" fill="#193750"/>
+  <path d="M60 128 245 48 410 116 224 200Z" fill="#244a64"><animate attributeName="transform" values="translate(0 0);translate(0 -8);translate(0 0)" dur="3s" repeatCount="indefinite"/></path>
+  <path d="M60 61 245 -19 410 49 224 133Z" fill="#315a70"><animate attributeName="transform" values="translate(0 0);translate(0 -12);translate(0 0)" dur="3s" begin=".2s" repeatCount="indefinite"/></path>
+  <g stroke="#9feaff" opacity=".8"><path d="M96 180v-54l75-32v55zM194 144v-52l74-32v53zM289 143v-50l76 31v52z"/><path d="M96 113v-53l75-32v54zM194 77v-52l74-32v53zM289 76v-49l76 31v51z"/></g>
+ </g>
+ <g transform="translate(455 78)" font-family="Inter,Arial">
+  <rect width="166" height="302" rx="18" fill="#10283d" stroke="#286187"/>
+  <text x="20" y="38" fill="#82e6ff" font-size="18" font-weight="700">CHECKS</text>
+  <g fill="#d9edf8" font-size="15"><text x="45" y="76">Room overlaps</text><text x="45" y="112">Door swings</text><text x="45" y="148">Furniture fit</text><text x="45" y="184">Natural light</text><text x="45" y="220">Privacy</text><text x="45" y="256">Plumbing stack</text></g>
+  <g fill="#6cf59a" font-size="22"><text x="17" y="78">✓</text><text x="17" y="114">✓</text><text x="17" y="150">✓</text><text x="17" y="186">✓</text><text x="17" y="222">✓</text><text x="17" y="258">✓</text></g>
+  <rect x="16" y="272" width="134" height="18" rx="9" fill="#153a47"/><rect x="16" y="272" width="134" height="18" rx="9" fill="#54e98e"><animate attributeName="width" values="0;134;134" keyTimes="0;.7;1" dur="5.4s" repeatCount="indefinite"/></rect>
+ </g>
+ <g transform="translate(38 390)" font-family="Inter,Arial"><rect width="584" height="54" rx="14" fill="#10283d"/><text x="25" y="35" fill="#a9bed0" font-size="17">JSON</text><text x="99" y="35" fill="#a9bed0" font-size="17">SVG</text><text x="166" y="35" fill="#a9bed0" font-size="17">DXF</text><text x="228" y="35" fill="#a9bed0" font-size="17">PDF</text><text x="292" y="35" fill="#a9bed0" font-size="17">PNG</text><text x="365" y="35" fill="#a9bed0" font-size="17">OpenSCAD</text><text x="475" y="35" fill="#a9bed0" font-size="17">IFC</text><text x="526" y="35" fill="#a9bed0" font-size="17">HTML</text></g>
+</g>
+<g transform="translate(60 706)" font-family="Inter,Arial">
+ <text x="0" y="-18" fill="#84ddff" font-size="19" font-weight="700">LIVE WORKFLOW</text>
+ <path d="M30 78H1370" stroke="#204c6c" stroke-width="9" stroke-linecap="round"/>
+ <path d="M30 78H1370" stroke="url(#flow)" stroke-width="5" stroke-linecap="round" stroke-dasharray="180 1160"><animate attributeName="stroke-dashoffset" values="180;-1160" dur="5.4s" repeatCount="indefinite"/></path>
+ <g fill="#0e2137" stroke="#2f6f96" stroke-width="2">
+  <g transform="translate(0)"><circle cx="55" cy="78" r="38"/><text x="55" y="84" text-anchor="middle" fill="#9cecff" font-size="24">1</text><text x="55" y="142" text-anchor="middle" fill="#e7f4ff" font-size="17">DEFINE</text></g>
+  <g transform="translate(250)"><circle cx="55" cy="78" r="38"/><text x="55" y="84" text-anchor="middle" fill="#9cecff" font-size="24">2</text><text x="55" y="142" text-anchor="middle" fill="#e7f4ff" font-size="17">GENERATE</text></g>
+  <g transform="translate(500)"><circle cx="55" cy="78" r="38"/><text x="55" y="84" text-anchor="middle" fill="#9cecff" font-size="24">3</text><text x="55" y="142" text-anchor="middle" fill="#e7f4ff" font-size="17">VALIDATE</text></g>
+  <g transform="translate(750)"><circle cx="55" cy="78" r="38"/><text x="55" y="84" text-anchor="middle" fill="#9cecff" font-size="24">4</text><text x="55" y="142" text-anchor="middle" fill="#e7f4ff" font-size="17">REFINE</text></g>
+  <g transform="translate(1000)"><circle cx="55" cy="78" r="38"/><text x="55" y="84" text-anchor="middle" fill="#9cecff" font-size="24">5</text><text x="55" y="142" text-anchor="middle" fill="#e7f4ff" font-size="17">DOCUMENT</text></g>
+  <g transform="translate(1250)"><circle cx="55" cy="78" r="38"/><text x="55" y="84" text-anchor="middle" fill="#9cecff" font-size="24">6</text><text x="55" y="142" text-anchor="middle" fill="#e7f4ff" font-size="17">DELIVER</text></g>
+ </g>
+ <circle r="13" fill="#fff" stroke="#5ee7ff" stroke-width="6" filter="url(#glow)"><animateMotion dur="5.4s" repeatCount="indefinite" path="M55 78H1305"/></circle>
+</g>
+</svg>
