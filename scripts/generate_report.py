@@ -67,20 +67,9 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.que
 </script></body></html>'''
 
 
-def create_viewer(
-    plan: dict[str, Any],
-    validation: dict[str, Any],
-    viewer_dir: Path,
-    artifacts: list[dict[str, str]],
-    before: dict[str, Any] | None = None,
-) -> Path:
+def create_viewer(plan: dict[str, Any], validation: dict[str, Any], viewer_dir: Path, artifacts: list[dict[str, str]], before: dict[str, Any] | None = None) -> Path:
     viewer_dir.mkdir(parents=True, exist_ok=True)
-    page = (
-        HTML_TEMPLATE.replace("__PLAN__", json_for_script(plan))
-        .replace("__BEFORE__", json_for_script(before) if before else "null")
-        .replace("__VALIDATION__", json_for_script(validation))
-        .replace("__ARTIFACTS__", json_for_script(artifacts))
-    )
+    page = (HTML_TEMPLATE.replace("__PLAN__", json_for_script(plan)).replace("__BEFORE__", json_for_script(before) if before else "null").replace("__VALIDATION__", json_for_script(validation)).replace("__ARTIFACTS__", json_for_script(artifacts)))
     output = viewer_dir / "index.html"
     output.write_text(page, encoding="utf-8")
     return output
@@ -101,17 +90,8 @@ def _zip_write(zf: zipfile.ZipFile, source: Path, archive_name: str) -> None:
     zf.writestr(info, source.read_bytes())
 
 
-def create_share_bundle(
-    root: Path,
-    plan: dict[str, Any],
-    validation: dict[str, Any],
-    before: dict[str, Any] | None,
-    records: list[dict[str, str]],
-    mode: str,
-    zip_path: Path,
-) -> Path:
+def create_share_bundle(root: Path, plan: dict[str, Any], validation: dict[str, Any], before: dict[str, Any] | None, records: list[dict[str, str]], mode: str, zip_path: Path, validation_path: Path, full_files: list[Path]) -> Path:
     zip_path.parent.mkdir(parents=True, exist_ok=True)
-
     allowed_suffixes = {".png", ".pdf", ".svg"} if mode == "review" else None
     selected = []
     for record in records:
@@ -135,35 +115,25 @@ def create_share_bundle(
             "source_drawings_included": False,
         }
         manifest_path = dump_json(share_manifest, temp / "share-manifest.json")
-
-        files: list[tuple[Path, str]] = [
-            (share_viewer, "viewer/index.html"),
-            (manifest_path, "share-manifest.json"),
-            (root / "output" / "validation.json", "output/validation.json"),
-        ]
+        files: list[tuple[Path, str]] = [(share_viewer, "viewer/index.html"), (manifest_path, "share-manifest.json"), (validation_path, relative_path(validation_path, root))]
         files.extend((root / item["path"], item["path"]) for item in selected)
         if mode == "full":
-            for rel in ("program.json", "villa-cad.json", "output/plan.json", "output/validation.json", "output/artifact-manifest.json"):
-                path = root / rel
-                if path.exists() and all(name != rel for _source, name in files):
+            for path in full_files:
+                if not path.exists():
+                    continue
+                rel = relative_path(path, root)
+                if all(name != rel for _source, name in files):
                     files.append((path, rel))
-
         with zipfile.ZipFile(zip_path, "w") as zf:
             for source, name in sorted(files, key=lambda item: item[1]):
                 _zip_write(zf, source, name)
     return zip_path
 
 
-def run(
-    project: Path,
-    before_path: Path | None = None,
-    with_ifc: bool = False,
-    share_mode: str = "none",
-) -> dict[str, Any]:
-    root, program_path, output, viewer = resolve_project_layout(project)
+def run(project: Path, before_path: Path | None = None, with_ifc: bool = False, share_mode: str = "none") -> dict[str, Any]:
+    root, program_path, output, viewer, share_dir = resolve_project_layout(project)
     output.mkdir(parents=True, exist_ok=True)
     viewer.mkdir(parents=True, exist_ok=True)
-
     program = load_json(program_path)
     plan = build_plan(program)
     plan_path = dump_json(plan, output / "plan.json")
@@ -203,7 +173,6 @@ def run(
     local_links = [{"label": item["label"], "href": "../" + item["path"]} for item in records]
     viewer_path = create_viewer(plan, validation, viewer, local_links, before)
     records.append(artifact("Local HTML viewer", viewer_path, root))
-
     report: dict[str, Any] = {
         "schema_version": "villa-floorplan-cad.manifest.v1",
         "project_root": ".",
@@ -217,10 +186,10 @@ def run(
     manifest_path = output / "artifact-manifest.json"
     if share_mode != "none":
         project_slug = slug(plan.get("project", {}).get("name", root.name))
-        share_path = root / "share" / f"{project_slug}-{share_mode}.zip"
+        share_path = share_dir / f"{project_slug}-{share_mode}.zip"
         report["share"] = {"mode": share_mode, "path": relative_path(share_path, root)}
         dump_json(report, manifest_path)
-        create_share_bundle(root, plan, validation, before, records, share_mode, share_path)
+        create_share_bundle(root, plan, validation, before, records, share_mode, share_path, validation_path, [program_path, root / "villa-cad.json", plan_path, validation_path, manifest_path])
     else:
         dump_json(report, manifest_path)
     return report
@@ -233,19 +202,8 @@ def main() -> None:
     parser.add_argument("--ifc", action="store_true", help="Generate IFC when optional dependencies are installed")
     parser.add_argument("--share", choices=("none", "review", "full"), default="none", help="Create a safe review bundle or a complete editable bundle")
     args = parser.parse_args()
-    report = run(
-        Path(args.project).expanduser().resolve(),
-        Path(args.before).expanduser().resolve() if args.before else None,
-        args.ifc,
-        args.share,
-    )
-    print(json.dumps({
-        "plan": report["plan"],
-        "issues": report["validation"]["summary"],
-        "dxf": report["dxf_status"],
-        "ifc": report["ifc_status"],
-        "share": report.get("share"),
-    }, indent=2))
+    report = run(Path(args.project).expanduser().resolve(), Path(args.before).expanduser().resolve() if args.before else None, args.ifc, args.share)
+    print(json.dumps({"plan": report["plan"], "issues": report["validation"]["summary"], "dxf": report["dxf_status"], "ifc": report["ifc_status"], "share": report.get("share")}, indent=2))
 
 
 if __name__ == "__main__":
