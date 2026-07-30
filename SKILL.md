@@ -16,6 +16,8 @@ Create buildable, editable floor-plan data rather than decorative images. Treat 
 - Use deterministic IDs, stable ordering, rounded coordinates, and reproducible outputs.
 - Never present a styled image as the plan deliverable. Generate editable data and drawings.
 - Do not claim permit or code approval. Select or create a jurisdiction profile, check current local authority requirements for the project location, and state remaining review items.
+- Treat future Blender/MCP work as an adapter that reads `plan.json`; do not let it become a second geometry source.
+- Keep private source drawings in `source/`; review share packages must exclude them by default.
 
 ## Start here
 
@@ -59,7 +61,7 @@ python ~/.codex/skills/villa-floorplan-cad/scripts/create_project.py \
 python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py villa-floorplan
 ```
 
-Add `--ifc` when IfcOpenShell is available. Add `--before path/to/old-plan.json` for a comparison view.
+Add `--ifc` when IfcOpenShell is available. Add `--before path/to/old-plan.json` for a comparison view. Add `--share review` for a client-safe ZIP or `--share full` for a complete editable package.
 
 ## Individual tools
 
@@ -71,7 +73,7 @@ Add `--ifc` when IfcOpenShell is available. Add `--before path/to/old-plan.json`
 - `scripts/export_pdf.py`: create an A3 drawing set with title block, names, areas, dimensions, north arrow, scale bar, legend, and issue markers.
 - `scripts/export_openscad.py`: create slabs, walls, openings, stairs, elevator shaft, roof, and parapets.
 - `scripts/export_ifc.py`: create an optional IFC4 model using IfcOpenShell.
-- `scripts/generate_report.py`: run the pipeline, write the manifest, and build the local HTML viewer.
+- `scripts/generate_report.py`: run the pipeline, write a relative-path manifest, build the local HTML viewer, and create optional share packages.
 
 ## Validation gate
 
@@ -114,7 +116,8 @@ A completed project contains:
 - `output/villa-model.scad`
 - optional `output/villa-model.ifc`
 - `output/validation.json`
-- `output/artifact-manifest.json`
+- `output/artifact-manifest.json` with project-relative paths
 - `viewer/index.html`
+- optional `share/<project>-review.zip` or `share/<project>-full.zip`
 
 Before finishing, run the automated tests in this skill and inspect at least one generated SVG, PNG, and rendered PDF page.

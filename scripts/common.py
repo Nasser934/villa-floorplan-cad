@@ -170,14 +170,32 @@ def round_coords(obj: Any, digits: int = 4) -> Any:
     return obj
 
 
+def _inside(root: Path, path: Path, label: str) -> Path:
+    resolved = path.expanduser().resolve()
+    if resolved != root and root not in resolved.parents:
+        raise ValueError(f"{label} must stay inside the project folder: {resolved}")
+    return resolved
+
+
+def resolve_project_layout(project: str | Path) -> tuple[Path, Path, Path, Path, Path]:
+    """Resolve project paths from villa-cad.json while keeping safe defaults."""
+    source = Path(project).expanduser().resolve()
+    if source.is_file():
+        root = source.parent
+        return root, source, root / "output", root / "viewer", root / "share"
+
+    root = source
+    config_path = root / "villa-cad.json"
+    config = load_json(config_path) if config_path.exists() else {}
+    program = _inside(root, root / config.get("program", "program.json"), "program")
+    output = _inside(root, root / config.get("output_dir", "output"), "output_dir")
+    viewer = _inside(root, root / config.get("viewer_dir", "viewer"), "viewer_dir")
+    share = _inside(root, root / config.get("share_dir", "share"), "share_dir")
+    return root, program, output, viewer, share
+
+
 def resolve_project_paths(project: str | Path) -> tuple[Path, Path, Path]:
-    root = Path(project).expanduser().resolve()
-    if root.is_file():
-        program = root
-        root = root.parent
-    else:
-        program = root / "program.json"
-    output = root / "output"
+    root, program, output, _viewer, _share = resolve_project_layout(project)
     return root, program, output
 
 

@@ -27,14 +27,50 @@ def deep_merge(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]:
 
 def load_profile(value: str) -> dict[str, Any]:
     candidate = Path(value).expanduser()
-    if candidate.exists():
-        path = candidate.resolve()
-    else:
-        path = PROFILE_DIR / f"{value}.json"
+    path = candidate.resolve() if candidate.exists() else PROFILE_DIR / f"{value}.json"
     if not path.exists():
         available = ", ".join(sorted(p.stem for p in PROFILE_DIR.glob("*.json")))
         raise SystemExit(f"Unknown profile: {value}. Available packaged profiles: {available}")
-    return json.loads(path.read_text(encoding="utf-8"))
+    profile = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(profile, dict) or not isinstance(profile.get("standards", {}), dict):
+        raise SystemExit(f"Invalid profile structure: {path}")
+    return profile
+
+
+def clean_generated_files(target: Path) -> None:
+    """Remove only files owned by this skill; preserve source drawings and user notes."""
+    for folder in ("output", "viewer", "share"):
+        shutil.rmtree(target / folder, ignore_errors=True)
+    for name in ("program.json", "villa-cad.json"):
+        path = target / name
+        if path.exists():
+            path.unlink()
+
+
+def write_project_readme(target: Path) -> None:
+    text = """# Villa floor-plan project
+
+Edit `program.json`, then rebuild all outputs from the same canonical model:
+
+```bash
+python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py .
+```
+
+Create a client-safe review package without source drawings or editable model files:
+
+```bash
+python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py . --share review
+```
+
+Create a complete editable package:
+
+```bash
+python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py . --share full
+```
+
+Open `viewer/index.html` locally after generation.
+"""
+    (target / "README.md").write_text(text, encoding="utf-8")
 
 
 def main() -> None:
@@ -43,7 +79,7 @@ def main() -> None:
     parser.add_argument("--project-dir", default="villa-floorplan", help="Relative folder created inside the repository")
     parser.add_argument("--profile", default="generic-metric", help="Packaged profile name or path to a custom JSON profile")
     parser.add_argument("--location", default=None, help="Project location written into program.json")
-    parser.add_argument("--force", action="store_true")
+    parser.add_argument("--force", action="store_true", help="Replace only generated skill files and keep source drawings")
     parser.add_argument("--generate", action="store_true", help="Run the full generation pipeline")
     args = parser.parse_args()
 
@@ -51,16 +87,18 @@ def main() -> None:
     target = (repo / args.project_dir).resolve()
     if repo not in target.parents and target != repo:
         raise SystemExit("project-dir must remain inside root")
-    if target.exists() and any(target.iterdir()) and not args.force:
-        raise SystemExit(f"Target is not empty: {target}. Use --force to replace generated scaffold files.")
+    if target.exists() and any(target.iterdir()):
+        if not args.force:
+            raise SystemExit(f"Target is not empty: {target}. Use --force to replace generated skill files.")
+        clean_generated_files(target)
 
     target.mkdir(parents=True, exist_ok=True)
-    (target / "output").mkdir(exist_ok=True)
-    (target / "viewer").mkdir(exist_ok=True)
+    for folder in ("source", "output", "viewer", "share"):
+        (target / folder).mkdir(exist_ok=True)
 
     base = json.loads((SKILL_ROOT / "assets" / "sample-villa-program.json").read_text(encoding="utf-8"))
     profile = load_profile(args.profile)
-    program = deep_merge(base, {k: v for k, v in profile.items() if k != "profile_id"})
+    program = deep_merge(base, {key: value for key, value in profile.items() if key != "profile_id"})
     program.setdefault("project", {})["standards_profile"] = profile.get("profile_id", args.profile)
     if args.location:
         program["project"]["location"] = args.location
@@ -71,11 +109,12 @@ def main() -> None:
         "program": "program.json",
         "output_dir": "output",
         "viewer_dir": "viewer",
+        "share_dir": "share",
         "metric_only": True,
         "profile": profile.get("profile_id", args.profile),
     }
     (target / "villa-cad.json").write_text(json.dumps(config, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    shutil.copy2(SKILL_ROOT / "requirements.txt", target / "requirements.txt")
+    write_project_readme(target)
     print(target)
     if args.generate:
         subprocess.run([sys.executable, str(SKILL_ROOT / "scripts" / "generate_report.py"), str(target)], check=True)

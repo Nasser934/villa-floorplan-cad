@@ -1,10 +1,21 @@
 [project]
 name = "villa-floorplan-cad"
-version = "0.2.0"
-description = "World-ready deterministic villa floor-plan generation, validation, and CAD export skill"
+version = "0.3.0"
+description = "World-ready deterministic villa floor-plan generation, validation, CAD export, and safe sharing"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Nasser934" }]
+dependencies = [
+  "ezdxf==1.4.4",
+  "shapely>=2.1,<3",
+  "svgwrite>=1.4,<2",
+  "reportlab>=4.4,<5",
+  "pillow>=12,<13",
+]
+
+[project.optional-dependencies]
+ifc = ["numpy>=1.26,<3", "ifcopenshell==0.8.5"]
+dev = ["pytest>=8,<10"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

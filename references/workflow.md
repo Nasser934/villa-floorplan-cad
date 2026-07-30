@@ -8,7 +8,7 @@ Assume the skill is installed at `~/.codex/skills/villa-floorplan-cad`.
 python -m pip install -r ~/.codex/skills/villa-floorplan-cad/requirements.txt
 ```
 
-IfcOpenShell is optional at runtime. The full pipeline records IFC as skipped when it is absent unless `--ifc` is requested.
+IfcOpenShell is optional at runtime. Install it with `requirements-ifc.txt` before requesting `--ifc`.
 
 ## Create a project in the current repository
 
@@ -25,8 +25,10 @@ This creates:
 
 - `villa-floorplan/program.json`
 - `villa-floorplan/villa-cad.json`
+- `villa-floorplan/source/`
 - `villa-floorplan/output/`
 - `villa-floorplan/viewer/`
+- `villa-floorplan/share/`
 
 ## Generate the canonical model
 
@@ -76,7 +78,7 @@ python ~/.codex/skills/villa-floorplan-cad/scripts/export_ifc.py \
 ## Run the full pipeline and viewer
 
 ```bash
-python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py villa-floorplan --ifc
+python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py villa-floorplan
 python -m http.server 8000 --directory villa-floorplan
 ```
 
@@ -116,3 +118,23 @@ python ~/.codex/skills/villa-floorplan-cad/scripts/create_project.py \
 ```
 
 Keep `generic-metric` for jurisdiction-neutral concept work. Add current local requirements before any permit or construction use.
+
+## Create a share package
+
+Client review package, excluding source drawings and editable model files:
+
+```bash
+python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py \
+  villa-floorplan \
+  --share review
+```
+
+Complete editable package:
+
+```bash
+python ~/.codex/skills/villa-floorplan-cad/scripts/generate_report.py \
+  villa-floorplan \
+  --share full
+```
+
+The artifact manifest stores project-relative paths. `source/` is excluded from both share modes.
